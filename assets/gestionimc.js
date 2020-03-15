@@ -42,6 +42,7 @@ export default {
   },
   methods: {
     crearUsuario() {
+      this.x = 0;
       if (this.lista_usuario.findIndex(usuario => usuario.id == this.usuario.id) === -1) {
         let calculo = (this.usuario.peso / (this.usuario.estatura * this.usuario.estatura)) * 10000;
         this.x = calculo.toFixed(2)
@@ -82,8 +83,8 @@ export default {
     },
     actualizarUsuario() {
       let calculo = (this.usuario.peso / (this.usuario.estatura * this.usuario.estatura)) * 10000;
-        this.x = calculo.toFixed(2)
-        this.usuario.IMC = this.x
+      this.x = calculo.toFixed(2)
+      this.usuario.IMC = this.x
       let posicion = this.lista_usuario.findIndex(
         usuario => usuario.id == this.usuario.id
       );
@@ -101,6 +102,7 @@ export default {
         acciones: true
       };
       this.saveLocalStorage();
+      this.enEdicion = false
     },
     saveLocalStorage() {
       localStorage.setItem("usuario", JSON.stringify(this.lista_usuario));
@@ -110,25 +112,30 @@ export default {
         this.lista_usuario = JSON.parse(localStorage.getItem("usuario"));
       }
     },
-    makeToast(variant = null) {
-      if (this.x < 18.5) {
-        this.estado = "Peso Inferior al Normal";
-      }
-      else if (this.x >= 18.5 || this.x <= 24.9) {
-        this.estado = "Peso normal";
-      }
-      else if (this.x >= 25 && this.x <= 29.9) {
-        this.estado = "Peso superior al normal";
-      }
+    mostrarestado() {
+      if (this.x < 18.5) { alert("Peso inferior al normal") }
+      else if (this.x >= 18.5 && this.x <= 24.9) { alert("Peso normal") }
+      else if (this.x >= 25 && this.x <= 29.9) { alert("Peso superior al normal") }
+      else if (this.x > 30) { alert("Obesidad") }
       else {
-        this.estado = "Obesidad";
-      }
+        alert("No ingresaste el peso y estatura")
+      }    
+    },
+    makeToast(variant = null) {
 
+      if (this.x < 18.5) { this.estado = "Peso inferior al normal"; }
+      else if (this.x >= 18.5 && this.x <= 24.9) { this.estado = "Peso normal"; }
+      else if (this.x >= 25 && this.x <= 29.9) { this.estado = "Peso superior al normal"; }
+      else if (this.x > 30) { this.estado = "Obesidad"; }
+      else {
+        alert("No ingresaste el peso y estatura")
+      }
       this.$bvToast.toast('Su estado medido desde el IMC ES :' + this.estado, {
         title: `Notificación de su estado`,
         variant: variant,
         solid: true
       })
+      this.estado = ""
     },
     created() {
       let datos = JSON.parse(localStorage.getItem('Usuario'))

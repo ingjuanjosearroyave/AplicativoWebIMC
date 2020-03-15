@@ -62,7 +62,7 @@
                   class="form-control"
                   v-model="usuario.peso"
                   id="peso"
-                  placeholder="Ingrese peso del usuario "
+                  placeholder="Ingrese peso del usuario en cm"
                   required
                 />
               </b-form-group>
@@ -79,7 +79,7 @@
               </b-form-group>
 
               <b-button type="submit" variant="primary" v-if="!enEdicion">Crear Usuario</b-button>
-              <b-button @click="actualizarUsuario()" variant="success" v-else >Actualizar Usuario</b-button>
+              <b-button @click="actualizarUsuario()" variant="success" v-else>Actualizar Usuario</b-button>
             </b-form>
           </b-card>
           <br />
@@ -95,7 +95,7 @@
               >Actualizar</b-button>
               <br />
               <br />
-                <b-button variant="primary" @click="makeToast('primary')" class="mb-2">Estado</b-button>
+                <b-button variant="primary" @click="mostrarestado()" class="mb-2">Estado</b-button>
               <br />
               <br />
               <b-button
