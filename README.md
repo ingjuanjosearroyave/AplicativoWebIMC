@@ -1,24 +1,25 @@
-# AplicativoWebIMC
+# Aplicativo Web para Gestión del IMC
 
-> Aplicativo Web IMC parcial desarrollo Web
+> Aplicativo Web para el Índice De Masa Corporal
 
-- este proyecto es para
+Desarrollador Juan José Arroyave Serna
 
-## Build Setup
+El aplicativo va permitir : 
+- Crear un usuario.
+- Modificar usuario.
+- Eliminar usuario.
+- Listar usuarios.
 
-``` bash
-# install dependencies
-$ npm install
+Para ello se requiere de ingresar a traves de formularios la siguiente información :
+- Tipo de identificación [CC, CE, RN, TI]
+- Identificación
+- Nombres
+- Apellidos
+- Correo
+- Peso
+- Estatura
 
-# serve with hot reload at localhost:3000
-$ npm run dev
 
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
