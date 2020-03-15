@@ -135,7 +135,7 @@ export default {
         variant: variant,
         solid: true
       })
-      this.estado = ""
+      //this.estado = ""
     },
     created() {
       let datos = JSON.parse(localStorage.getItem('Usuario'))

@@ -1,27 +1,22 @@
 <template>
   <div class="container">
     <div>
-      <logo />
-      <h1 class="title">
-        Aplicativo Web IMC
-      </h1>
-      <h2 class="subtitle">
-        Bienvenido a calcular su Índice de Masa Corporal
-      </h2>
-      <b-button href="/gestionimc" variant="primary">Gestión IMC</b-button>
-      
+      <b-img center src="@/static/images/imc.png" width="250" height="250"></b-img>
+      <h1 class="title">Aplicativo Web IMC</h1>
+      <h2 class="subtitle">Señor Usuario conozca su Índice de Masa Corporal</h2>
+      <b-button href="/gestionimc" variant="warning"><b-img center src="@/static/images/bmi.png" width="50" height="50"></b-img>Ingresar Aquí</b-button>
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import Logo from "~/components/Logo.vue";
 
 export default {
   components: {
     Logo
   }
-}
+};
 </script>
 
 <style>
@@ -35,8 +30,8 @@ export default {
 }
 
 .title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;
