@@ -2,6 +2,8 @@
 
 > Aplicativo Web IMC parcial desarrollo Web
 
+- este proyecto es para
+
 ## Build Setup
 
 ``` bash

@@ -79,7 +79,7 @@
               </b-form-group>
 
               <b-button type="submit" variant="primary" v-if="!enEdicion">Crear Usuario</b-button>
-              <b-button @click="actualizarUsuario()" variant="success" v-else>Actualizar Usuario</b-button>
+              <b-button @click="actualizarUsuario()" variant="success" v-else >Actualizar Usuario</b-button>
             </b-form>
           </b-card>
           <br />
