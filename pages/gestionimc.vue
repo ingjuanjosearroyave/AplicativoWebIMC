@@ -4,8 +4,10 @@
     <b-container class="bv-example-row">
       <b-row cols="3">
         <b-col>
-          <b-card title="Gestión del Índice de Masa Corporal de los Usuarios">
-            <b-card-text>Ingrese los datos requeridos para calcular su IMC:</b-card-text>
+          <b-card title="Gestión del Índice de Masa Corporal" style="color:blue">
+            <b-card-text>
+              <b-img left="2px" src="@/static/images/imc.png" width="70" height="70"></b-img>Apreciado Usuario por favor ingrese los datos requeridos para calcular su IMC:
+            </b-card-text>
 
             <b-form action="javascript:void(0)" @submit="crearUsuario()">
               <b-form-group>
@@ -14,6 +16,7 @@
                   :options="tipoIdentificacion"
                   required
                 ></b-form-select>
+                <b-form-invalid-feedback :state="validacion2">Campo obligatorio</b-form-invalid-feedback>
               </b-form-group>
               <b-form-group label="Identificación" label-for="id">
                 <b-form-input
@@ -24,6 +27,7 @@
                   required
                   id="id"
                 />
+                 <b-form-invalid-feedback :state="validacion1">Campo obligatorio</b-form-invalid-feedback>
               </b-form-group>
 
               <b-form-group label="Nombres" label-for="nombres">
@@ -34,6 +38,7 @@
                   required
                   id="nombres"
                 />
+                <b-form-invalid-feedback :state="validacion3">Campo obligatorio</b-form-invalid-feedback>
               </b-form-group>
 
               <b-form-group label="Apellidos" label-for="apellidos">
@@ -44,6 +49,7 @@
                   required
                   id="apellidos"
                 />
+                <b-form-invalid-feedback :state="validacion4">Campo obligatorio</b-form-invalid-feedback>
               </b-form-group>
 
               <b-form-group label="Correo" label-for="correo">
@@ -54,6 +60,7 @@
                   placeholder="Ingrese Correo del Usuario"
                   required
                 />
+                <b-form-invalid-feedback :state="validacion5">Campo obligatorio</b-form-invalid-feedback>
               </b-form-group>
 
               <b-form-group label="Peso" label-for="peso">
@@ -65,9 +72,10 @@
                   placeholder="Ingrese peso del usuario en cm"
                   required
                 />
+                <b-form-invalid-feedback :state="validacion6">Campo obligatorio</b-form-invalid-feedback>
               </b-form-group>
 
-              <b-form-group label="Estatura" label-for="estatura">
+              <b-form-group label="Estatura (cm)" label-for="estatura">
                 <b-form-input
                   type="number"
                   class="form-control"
@@ -76,6 +84,7 @@
                   placeholder="Ingrese estatura del usuario "
                   required
                 />
+                <b-form-invalid-feedback :state="validacion7">Campo obligatorio</b-form-invalid-feedback>
               </b-form-group>
 
               <b-button type="submit" variant="primary" v-if="!enEdicion">Crear Usuario</b-button>
@@ -95,7 +104,7 @@
               >Actualizar</b-button>
               <br />
               <br />
-                <b-button variant="primary" @click="mostrarestado()" class="mb-2">Estado</b-button>
+              <b-button variant="primary" @click="makeToast('success')" class="mb-2">Estado</b-button>
               <br />
               <br />
               <b-button

@@ -1,10 +1,12 @@
 export default {
   data() {
     return {
+      /** variables globales */
       x: 0,
       estado: "",
       mensaje: "CRUD De Indice de Masa Corporal Usuario",
       enEdicion: false,
+      /** json para la ejecución y creación del crud en el aplicativo */
       usuario: {
         tipoidentificacion: "",
         id: "",
@@ -16,6 +18,7 @@ export default {
         IMC: "",
         acciones: true
       },
+      /** array de  usuario para previsualización en el aplicativo  */
       lista_usuario: [
         {
           tipoidentificacion: "CC",
@@ -38,11 +41,35 @@ export default {
     };
   },
   mounted() {
-    this.created();
+    //this.created();
+  },
+   /** Determina las validaciones de los campos vacios en la aplicacion */
+  computed: {
+    validacion1() {
+      return this.usuario.id.length > 0
+    },
+    validacion2() {
+      return this.usuario.tipoidentificacion > 0
+    },
+    validacion3() {
+      return this.usuario.nombres.length > 0
+    },
+    validacion4() {
+      return this.usuario.apellidos.length > 0
+    },
+    validacion5() {
+      return this.usuario.correo.length > 0
+    },
+    validacion6() {
+      return this.usuario.peso.length > 0
+    },
+    validacion7() {
+      return this.usuario.estatura.length > 0
+    }
   },
   methods: {
+    /** metodo que permite crear el usuario con sus datos requerido y calcula su IMC almacenando en el localstorage */
     crearUsuario() {
-      this.x = 0;
       if (this.lista_usuario.findIndex(usuario => usuario.id == this.usuario.id) === -1) {
         let calculo = (this.usuario.peso / (this.usuario.estatura * this.usuario.estatura)) * 10000;
         this.x = calculo.toFixed(2)
@@ -60,11 +87,15 @@ export default {
           acciones: true
         };
         this.saveLocalStorage();
+        this.estado = ""
       }
       else {
         alert('Este usuario ya se encuentra Registrado')
       }
     },
+    /** 
+     * Metodo que elimina el usuario registrado de la lista y del localstorage
+     */
     eliminarUsuario({ item }) {
       let posicion = this.lista_usuario.findIndex(
         usuario => usuario.id == item.id
@@ -72,6 +103,7 @@ export default {
       this.lista_usuario.splice(posicion, 1);
       this.saveLocalStorage();
     },
+    /** metodo que carga el usuario desde una lista previa definida y almacena en el localstorage */
     cargarUsuario({ item }) {
       let cargarusuario = this.lista_usuario.find(
         usuario => usuario.id == item.id
@@ -81,6 +113,7 @@ export default {
       this.saveLocalStorage();
 
     },
+    /** metodo que permite actualizar un usuario registrado tambien desde el localstorage */
     actualizarUsuario() {
       let calculo = (this.usuario.peso / (this.usuario.estatura * this.usuario.estatura)) * 10000;
       this.x = calculo.toFixed(2)
@@ -104,25 +137,18 @@ export default {
       this.saveLocalStorage();
       this.enEdicion = false
     },
+    /** metodo que permite guardar los cambios que se hagan en el localstorage */
     saveLocalStorage() {
       localStorage.setItem("usuario", JSON.stringify(this.lista_usuario));
     },
+    /** metodo que permite hacer los cambios necesario y almacenar en el localstorage  */
     getLocalStorage() {
       if (localStorage.getItem("usuario")) {
         this.lista_usuario = JSON.parse(localStorage.getItem("usuario"));
       }
     },
-    mostrarestado() {
-      if (this.x < 18.5) { alert("Peso inferior al normal") }
-      else if (this.x >= 18.5 && this.x <= 24.9) { alert("Peso normal") }
-      else if (this.x >= 25 && this.x <= 29.9) { alert("Peso superior al normal") }
-      else if (this.x > 30) { alert("Obesidad") }
-      else {
-        alert("No ingresaste el peso y estatura")
-      }    
-    },
+    /**metodo que crea una notificacion emergente para visualizar el estado del usuario */
     makeToast(variant = null) {
-
       if (this.x < 18.5) { this.estado = "Peso inferior al normal"; }
       else if (this.x >= 18.5 && this.x <= 24.9) { this.estado = "Peso normal"; }
       else if (this.x >= 25 && this.x <= 29.9) { this.estado = "Peso superior al normal"; }
@@ -130,13 +156,14 @@ export default {
       else {
         alert("No ingresaste el peso y estatura")
       }
-      this.$bvToast.toast('Su estado medido desde el IMC ES :' + this.estado, {
-        title: `Notificación de su estado`,
+      this.$bvToast.toast('Su estado medido desde el IMC ES : ' + this.estado, {
+        title: `Notificación de su condición Física a partir del IMC`,
         variant: variant,
         solid: true
       })
-      //this.estado = ""
+      this.estado = ""
     },
+    /** Permite crear datos para revisualizar y almacenar en el localstorage */
     created() {
       let datos = JSON.parse(localStorage.getItem('Usuario'))
       if (!datos) {
